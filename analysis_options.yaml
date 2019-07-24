@@ -1,4 +1,4 @@
-#Custom rules for dart static analysis
+# Custom rules for dart static analysis
 
 include: package:pedantic/analysis_options.yaml
 
