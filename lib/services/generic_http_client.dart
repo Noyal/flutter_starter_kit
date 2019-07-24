@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:starter_kit/models/api/generic_model.dart';
+import 'package:starter_kit/models/enums/http_enum.dart';
 import 'package:starter_kit/models/maps/http_map.dart';
 
 class HttpClient {
