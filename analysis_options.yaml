@@ -6,3 +6,4 @@ include: package:pedantic/analysis_options.yaml
 #   rules:
 #     - camel_case_types
 #     - empty_constructor_bodies
+#     - constant_identifier_names
