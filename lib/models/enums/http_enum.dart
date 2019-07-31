@@ -1,4 +1,7 @@
 enum HttpError {
+  OK,
+  CREATED,
+  NO_CONTENT,
   NO_INTERNET,
   ERROR,
   BAD_REQUEST,
