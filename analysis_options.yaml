@@ -7,3 +7,7 @@ include: package:pedantic/analysis_options.yaml
 #     - camel_case_types
 #     - empty_constructor_bodies
 #     - constant_identifier_names
+
+linter:
+  rules:
+    curly_braces_in_flow_control_structures : false

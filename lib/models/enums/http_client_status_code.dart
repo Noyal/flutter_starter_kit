@@ -1,4 +1,4 @@
-enum HttpError {
+enum HttpClientStatusCode {
   OK,
   CREATED,
   NO_CONTENT,
