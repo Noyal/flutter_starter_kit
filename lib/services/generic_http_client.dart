@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:connectivity/connectivity.dart';
 import 'package:flutter/foundation.dart';
 import 'package:starter_kit/extensions/serializer_extension.dart';
 import 'package:starter_kit/models/api/http_client_model.dart';
 import 'package:starter_kit/models/enums/http_client_status_code.dart';
 import 'package:starter_kit/models/maps/http_map.dart';
+import 'package:starter_kit/services/connectivity/base_connectivity_service.dart';
+import 'package:starter_kit/services/connectivity/connectivity_service.dart';
 
 class HttpClient {
   Dio dio;
@@ -15,8 +16,10 @@ class HttpClient {
         HttpClientStatusCode.CREATED,
         HttpClientStatusCode.NO_CONTENT
       ];
-
-  HttpClient() {
+  BaseConnectivityService connectivityService;
+  HttpClient({BaseConnectivityService connectivityService})
+      : this.connectivityService =
+            connectivityService ?? ConnectivityService() {
     dio = Dio(BaseOptions(
       contentType: ContentType.json,
       connectTimeout: 10000,
@@ -27,8 +30,8 @@ class HttpClient {
   Future<HttpClientStatusCode> _checkConnectivity() async {
     HttpClientStatusCode clientStatusCode;
     try {
-      var connectivityResult = await (Connectivity().checkConnectivity());
-      clientStatusCode = connectivityResult == ConnectivityResult.none
+      var hasConnection = await connectivityService.hasConnection;
+      clientStatusCode = hasConnection
           ? HttpClientStatusCode.NO_INTERNET
           : HttpClientStatusCode.ERROR;
     } catch (e) {

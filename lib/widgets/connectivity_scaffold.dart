@@ -20,7 +20,7 @@ class _ConnectivityScaffoldState extends State<ConnectivityScaffold> {
   void initState() {
     super.initState();
     _connectivity = ConnectivityService();
-    _connectivity.checkConnectivity().then((onData) {
+    _connectivity.checkConnectivityState().then((onData) {
       if (onData == ConnectivityState.offline) _popSnackBar(onData);
     });
     _connectivity.onConnectivityChanged.listen((onData) {

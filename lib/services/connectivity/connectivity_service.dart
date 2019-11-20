@@ -45,21 +45,22 @@ class ConnectivityService implements BaseConnectivityService {
   }
 
   @override
-  Future<ConnectivityState> checkConnectivity() => _getConnectivityStateAsync();
+  Future<ConnectivityState> checkConnectivityState() =>
+      _getConnectivityStateAsync();
 
   @override
   Stream<ConnectivityState> get onConnectivityChanged {
     if (_onConnectivityChanged == null) {
-      _onConnectivityChanged = _connectivity.onConnectivityChanged
-          .asyncMap((dynamic event) async{
-            return _getConnectivityStateAsync();
-          });
+      _onConnectivityChanged =
+          _connectivity.onConnectivityChanged.asyncMap((dynamic event) async {
+        return _getConnectivityStateAsync();
+      });
     }
     return _onConnectivityChanged;
   }
 
   Future<ConnectivityState> _getConnectivityStateAsync() async {
-    var connectionStatus = await _hasConnection;
+    var connectionStatus = await hasConnection;
     return connectionStatus
         ? ConnectivityState.online
         : ConnectivityState.offline;
@@ -83,7 +84,8 @@ class ConnectivityService implements BaseConnectivityService {
     }
   }
 
-  Future<bool> get _hasConnection async {
+  @override
+  Future<bool> get hasConnection async {
     List<Future<AddressCheckResult>> requests = [];
 
     for (var addressOptions in addresses) {

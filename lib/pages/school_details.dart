@@ -5,7 +5,9 @@ class SchoolDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConnectivityScaffold(
-      appBar: AppBar(title: Text('School Details'),),
+      appBar: AppBar(
+        title: Text('School Details'),
+      ),
       child: Center(
         child: Text('School Details'),
       ),
