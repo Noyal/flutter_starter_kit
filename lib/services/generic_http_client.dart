@@ -1,30 +1,35 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:dio_http2_adapter/dio_http2_adapter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:starter_kit/extensions/serializer_extension.dart';
 import 'package:starter_kit/models/api/http_client_model.dart';
-import 'package:starter_kit/models/enums/http_client_status_code.dart';
+import 'package:starter_kit/models/api/http_client_status_code.dart';
 import 'package:starter_kit/models/maps/http_map.dart';
+import 'package:starter_kit/services/base_http_client.dart';
 import 'package:starter_kit/services/connectivity/base_connectivity_service.dart';
 import 'package:starter_kit/services/connectivity/connectivity_service.dart';
 
-class HttpClient {
+class HttpClient implements BaseHttpClient {
   Dio dio;
   List<HttpClientStatusCode> get _success => [
         HttpClientStatusCode.OK,
         HttpClientStatusCode.CREATED,
         HttpClientStatusCode.NO_CONTENT
       ];
+
   BaseConnectivityService connectivityService;
+
   HttpClient({BaseConnectivityService connectivityService})
       : this.connectivityService =
             connectivityService ?? ConnectivityService() {
     dio = Dio(BaseOptions(
-      contentType: ContentType.json,
+      contentType: Headers.jsonContentType,
       connectTimeout: 10000,
       receiveTimeout: 10000,
     ));
+    dio.httpClientAdapter = Http2Adapter(ConnectionManager(idleTimeout: 10000));
   }
 
   Future<HttpClientStatusCode> _checkConnectivity() async {

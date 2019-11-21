@@ -11,7 +11,8 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^0.1.2
   analyzer: "0.39.1"
-  dio: "2.1.13"
+  dio: "3.0.5"
+  dio_http2_adapter: "1.0.0"
   jaguar_serializer: "2.2.12"
   connectivity: "0.4.5+2"
 

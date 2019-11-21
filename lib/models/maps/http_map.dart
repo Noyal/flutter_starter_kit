@@ -1,4 +1,4 @@
-import 'package:starter_kit/models/enums/http_client_status_code.dart';
+import 'package:starter_kit/models/api/http_client_status_code.dart';
 
 Map<int, HttpClientStatusCode> httpErrorVal = {
   0: HttpClientStatusCode.NO_INTERNET,
